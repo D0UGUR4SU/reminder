@@ -23,7 +23,7 @@ Backend Setup:
 Navigate to the backend directory:
 
 ```bash
-cd reminder-architecture/backend
+cd reminder/backend
 ```
 
 Install dependencies:
