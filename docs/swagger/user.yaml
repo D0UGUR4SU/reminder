@@ -1,0 +1,46 @@
+openapi: 3.0.0
+info:
+  title: Notification Service API
+  description: API documentation for the Notification microservice.
+  version: 1.0.0
+servers:
+  - url: http://api.example.com/notification
+    description: Production server
+paths:
+  /notifications:
+    post:
+      summary: Send a notification
+      description: Send a notification to a user.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                  description: ID of the user to send the notification
+                message:
+                  type: string
+                  description: Content of the notification message
+              required:
+                - userId
+                - message
+      responses:
+        '200':
+          description: Notification sent successfully
+components:
+  schemas:
+    Notification:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: ID of the user receiving the notification
+        message:
+          type: string
+          description: Content of the notification message
+      required:
+        - userId
+        - message
