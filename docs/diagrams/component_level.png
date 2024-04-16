@@ -1,0 +1,16 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+System_Boundary(System, "Reminder Management System") {
+    Container(Backend, "Backend", "Java Spring Boot", "RESTful API with Microservices") {
+        Component(ReminderService, "ReminderService", "Java", "Service for managing reminders")
+        Component(AuthService, "AuthService", "Java", "Service for authentication and authorization")
+        Component(NotificationService, "NotificationService", "Java", "Service for sending notifications")
+        Component(Persistence, "Persistence", "Java", "Data persistence layer (MongoDB)")
+    }
+    Container(Frontend, "Frontend", "Angular", "User Interface (UI)")
+}
+
+Rel(Frontend, Backend, "Send HTTP/JSON requests to", "HTTP/JSON")
+@enduml
