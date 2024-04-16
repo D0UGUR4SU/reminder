@@ -1,0 +1,16 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+System_Boundary(Sistema, "Sistema de Gerenciamento de Lembretes") {
+    Container(Frontend, "Frontend", "Angular", "Interface do Usuário (UI)")
+    Container(Backend, "Backend", "Java Spring Boot", "API RESTful com Microserviços")
+
+    Person(User, "Usuário", "Usuário final")
+
+    User -> Frontend : Interage com a interface
+    Frontend -> Backend : Envia requisições HTTP/JSON
+    Backend --> Frontend : Retorna respostas HTTP/JSON
+}
+
+Rel(User, Frontend, "Utiliza", "HTTP/JSON")
+@enduml

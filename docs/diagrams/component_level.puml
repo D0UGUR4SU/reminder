@@ -1,0 +1,16 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+System_Boundary(Sistema, "Sistema de Gerenciamento de Lembretes") {
+    Container(Backend, "Backend", "Java Spring Boot", "API RESTful com Microserviços") {
+        Component(ReminderService, "ReminderService", "Java", "Serviço para gerenciamento de lembretes")
+        Component(AuthService, "AuthService", "Java", "Serviço para autenticação e autorização")
+        Component(NotificationService, "NotificationService", "Java", "Serviço para envio de notificações")
+        Component(Persistence, "Persistence", "Java", "Camada de persistência de dados (MongoDB)")
+    }
+    Container(Frontend, "Frontend", "Angular", "Interface do Usuário (UI)")
+}
+
+Rel(Frontend, Backend, "Envia requisições HTTP/JSON para", "HTTP/JSON")
+@enduml

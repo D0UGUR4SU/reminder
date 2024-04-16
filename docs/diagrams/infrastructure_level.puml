@@ -1,0 +1,13 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+Container(backend, "Backend", "Java Spring Boot", "Backend da aplicação")
+System_Boundary(Infraestrutura, "Infraestrutura AWS") {
+    Container(EC2, "EC2 Instance", "AWS EC2", "Máquina virtual na nuvem")
+    Container(S3, "S3", "AWS S3", "Armazenamento de arquivos estáticos")
+    ContainerDb(DocumentDB, "DocumentDB", "AWS DocumentDB", "Banco de dados NoSQL")
+
+    Rel(backend, DocumentDB, "Acessa dados", "MongoDB")
+}
+
+@enduml
