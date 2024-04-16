@@ -1,0 +1,198 @@
+openapi: 3.0.0
+info:
+  title: Reminder Management API
+  description: RESTful API for managing reminders with image upload
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080
+    description: Local server (development)
+
+paths:
+  /api/reminders:
+    get:
+      summary: Retrieve all reminders
+      operationId: listReminders
+      responses:
+        '200':
+          description: List of reminders retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Reminder'
+    post:
+      summary: Create a new reminder
+      operationId: createReminder
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ReminderCreateInput'
+      responses:
+        '201':
+          description: Reminder created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reminder'
+        '400':
+          description: Bad request - Validation error in reminder data
+
+  /api/reminders/{id}:
+    get:
+      summary: Get details of a reminder by ID
+      operationId: getReminderById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the reminder to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Reminder details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reminder'
+        '404':
+          description: Reminder not found
+
+    put:
+      summary: Update a reminder by ID
+      operationId: updateReminderById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the reminder to update
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ReminderUpdateInput'
+      responses:
+        '200':
+          description: Reminder updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reminder'
+        '404':
+          description: Reminder not found
+        '400':
+          description: Bad request - Validation error in reminder data
+
+    delete:
+      summary: Delete a reminder by ID
+      operationId: deleteReminderById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the reminder to delete
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Reminder deleted successfully
+        '404':
+          description: Reminder not found
+
+  /api/reminders/{id}/image:
+    post:
+      summary: Upload an image for a reminder
+      operationId: uploadReminderImage
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the reminder to associate the image with
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Image uploaded successfully
+        '404':
+          description: Reminder not found
+
+components:
+  schemas:
+    Reminder:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        description:
+          type: string
+        dueDate:
+          type: string
+          format: date
+        priority:
+          type: string
+          enum: [LOW, MEDIUM, HIGH]
+        imageUrl:
+          type: string
+      required:
+        - title
+        - description
+        - dueDate
+        - priority
+
+    ReminderCreateInput:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        dueDate:
+          type: string
+          format: date
+        priority:
+          type: string
+          enum: [LOW, MEDIUM, HIGH]
+      required:
+        - title
+        - description
+        - dueDate
+        - priority
+
+    ReminderUpdateInput:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        dueDate:
+          type: string
+          format: date
+        priority:
+          type: string
+          enum: [LOW, MEDIUM, HIGH]
+      required:
+        - title
+        - description
+        - dueDate
+        - priority
