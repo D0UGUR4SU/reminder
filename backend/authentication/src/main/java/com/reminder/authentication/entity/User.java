@@ -8,7 +8,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -16,11 +15,9 @@ import java.util.stream.Collectors;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class User implements UserDetails, Serializable {
+public class User implements UserDetails {
 
-  private static final long serialVersionUID = 1L;
-
-  private Long id;
+  private String id;
   private String name;
   private String email;
   private String password;
