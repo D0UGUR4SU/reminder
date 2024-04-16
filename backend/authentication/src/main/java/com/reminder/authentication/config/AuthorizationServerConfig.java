@@ -23,20 +23,22 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
   @Value("${oauth.client.secret}")
   private String clientSecret;
 
+  @Value("${oauth.client.grantType}")
+  private String grantType;
+
+  private final JwtTokenStore tokenStore;
   private final BCryptPasswordEncoder passwordEncoder;
   private final JwtAccessTokenConverter accessTokenConverter;
-  private final JwtTokenStore tokenStore;
   private final AuthenticationManager authenticationManager;
 
   @Autowired
-  public AuthorizationServerConfig(
-      BCryptPasswordEncoder passwordEncoder,
-      JwtAccessTokenConverter accessTokenConverter,
-      JwtTokenStore tokenStore,
-      AuthenticationManager authenticationManager) {
+  public AuthorizationServerConfig(JwtTokenStore tokenStore,
+                                   BCryptPasswordEncoder passwordEncoder,
+                                   JwtAccessTokenConverter accessTokenConverter,
+                                   AuthenticationManager authenticationManager) {
+    this.tokenStore = tokenStore;
     this.passwordEncoder = passwordEncoder;
     this.accessTokenConverter = accessTokenConverter;
-    this.tokenStore = tokenStore;
     this.authenticationManager = authenticationManager;
   }
 
@@ -52,7 +54,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         .withClient(clientId)
         .secret(passwordEncoder.encode(clientSecret))
         .scopes("read", "write")
-        .authorizedGrantTypes("password")
+        .authorizedGrantTypes(grantType)
         .accessTokenValiditySeconds(86400);
   }
 
