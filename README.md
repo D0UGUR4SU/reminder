@@ -1,17 +1,21 @@
-## Reminder Architecture
-This repository contains the Reminder Architecture project, which implements a reminder management system using a microservices architecture.
+<h1 align="center">Reminder</h1>
 
-## Overview
-The Reminder Architecture project consists of frontend (Angular), backend (Java Spring Boot), and associated microservices for handling reminder management tasks. It utilizes cloud services (AWS) for deployment and MongoDB for data persistence.
+This repository contains the Reminder project, which implements a reminder management 
+system using a microservices architecture.
+
+## 💻 Overview
+The Reminder project consists of frontend (Angular), backend (Java Spring Boot), 
+and associated microservices for handling reminder management tasks. 
+It utilizes cloud services (AWS) for deployment and MongoDB for data persistence.
 
 ---
-## Installation
+## 🛠 Installation
 To run the project locally, follow these steps:
 
 Clone the repository:
 
 ```bash
-git clone https://github.com/D4GUR4SU/reminder-architecture.git
+git clone https://github.com/D4GUR4SU/reminder.git
 ```
 
 Backend Setup:
@@ -39,7 +43,7 @@ Frontend Setup:
 Navigate to the frontend directory:
 
 ```bash
-cd reminder-architecture/frontend
+cd reminder/frontend
 ```
 
 Install dependencies:
@@ -59,11 +63,13 @@ Access the Application:
 Open your browser and navigate to ```http://localhost:4200```. to access the Angular frontend.
 
 ---
-## API Documentation
-The API endpoints are documented using Swagger (OpenAPI). You can find the Swagger contract in the docs/swagger directory.
+## 🧾 API Documentation
+The API endpoints are documented using Swagger (OpenAPI). You can find the Swagger contract 
+in the docs/swagger directory.
 
 ---
-# Folder Structure
+# 🗂️ Folder Structure
+
     backend: Contains the Java Spring Boot backend application.
     frontend: Contains the Angular frontend application.
     docs: Contains documentation related to the project.
@@ -90,4 +96,20 @@ Create a new Pull Request.
 ---
 ## License
 This project is licensed under the MIT License.
+
+---
+## 👨🏻‍💻 Author
+
+<a href="#">
+ <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/50157211?s=120&v=4" width="100px;" alt=""/>
+<br />
+
+Made by Douglas Souza 👋🏽 Get in touch!
+
+[![Linkedin Badge](https://img.shields.io/badge/-Douglas-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/dagurasujava/)](https://www.linkedin.com/in/dagurasujava/)
+
+---
+## README versions
+
+[English 🇺🇸](./README.md)
 
