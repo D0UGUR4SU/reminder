@@ -1,0 +1,125 @@
+asyncapi: 3.0.0
+info:
+  title: Reminder Application
+  version: 1.0.0
+  description: >-
+    This application allows users to create, update, and delete reminders. It
+    uses AWS SNS for publishing messages and AWS SQS for consuming them.
+servers:
+  development:
+    url: http://localhost:4566
+    protocol: aws-sqs
+    description: Development AWS services
+  production:
+    url: https://sqs.us-east-1.amazonaws.com
+    protocol: aws-sqs
+    description: Production AWS SQS service
+channels:
+  reminder-created:
+    description: A channel for reminder creation events
+    subscribe:
+      message:
+        name: ReminderCreated
+        title: Reminder Created
+        summary: Event triggered when a new reminder is created
+        contentType: application/json
+        payload:
+          type: object
+          properties:
+            id:
+              type: string
+              description: The unique identifier of the reminder
+            title:
+              type: string
+              description: The title of the reminder
+            dueDate:
+              type: string
+              format: date-time
+              description: The due date of the reminder
+      bindings:
+        aws-sqs:
+          queue:
+            name: reminder-created-queue
+  reminder-updated:
+    description: A channel for reminder update events
+    subscribe:
+      message:
+        name: ReminderUpdated
+        title: Reminder Updated
+        summary: Event triggered when a reminder is updated
+        contentType: application/json
+        payload:
+          type: object
+          properties:
+            id:
+              type: string
+              description: The unique identifier of the reminder
+            title:
+              type: string
+              description: The updated title of the reminder
+            dueDate:
+              type: string
+              format: date-time
+              description: The updated due date of the reminder
+      bindings:
+        aws-sqs:
+          queue:
+            name: reminder-updated-queue
+  reminder-deleted:
+    description: A channel for reminder deletion events
+    subscribe:
+      message:
+        name: ReminderDeleted
+        title: Reminder Deleted
+        summary: Event triggered when a reminder is deleted
+        contentType: application/json
+        payload:
+          type: object
+          properties:
+            id:
+              type: string
+              description: The unique identifier of the reminder
+      bindings:
+        aws-sqs:
+          queue:
+            name: reminder-deleted-queue
+  reminder-notification:
+    description: A channel for sending reminder notifications
+    publish:
+      message:
+        name: ReminderNotification
+        title: Reminder Notification
+        summary: Event triggered to send a reminder notification
+        contentType: application/json
+        payload:
+          type: object
+          properties:
+            id:
+              type: string
+              description: The unique identifier of the reminder
+            title:
+              type: string
+              description: The title of the reminder
+            dueDate:
+              type: string
+              format: date-time
+              description: The due date of the reminder
+      bindings:
+        aws-sns:
+          topic:
+            name: reminder-notifications-topic
+components:
+  schemas:
+    Reminder:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the reminder
+        title:
+          type: string
+          description: The title of the reminder
+        dueDate:
+          type: string
+          format: date-time
+          description: The due date of the reminder
