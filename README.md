@@ -11,7 +11,7 @@ To run the project locally, follow these steps:
 Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/reminder-architecture.git
+git clone https://github.com/D4GUR4SU/reminder-architecture.git
 ```
 
 Backend Setup:
