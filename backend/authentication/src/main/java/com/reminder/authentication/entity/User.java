@@ -39,6 +39,11 @@ public class User implements UserDetails, Serializable {
   }
 
   @Override
+  public String getPassword() {
+    return password;
+  }
+
+  @Override
   public boolean isAccountNonExpired() {
     return true;
   }

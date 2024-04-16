@@ -23,7 +23,7 @@ import java.util.Arrays;
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
   private static final String[] PUBLIC = {"/authentication/oauth/token"};
-  private static final String[] OPERATOR = {"/actuator/**"};
+  private static final String[] OPERATOR = {"/reminder/**"};
   private static final String[] ADMINISTRATOR = {
     "/reminder/**", "/user/**", "/actuator/**", "/authentication/actuator/**"
   };
