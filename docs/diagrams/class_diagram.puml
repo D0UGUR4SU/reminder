@@ -1,0 +1,65 @@
+@startuml
+class User {
+    - id: Long
+    - name: String
+    - email: String
+    - password: String
+
+    + getId(): Long
+    + getName(): String
+    + getEmail(): String
+    + getPassword(): String
+    + setName(name: String): void
+    + setEmail(email: String): void
+    + setPassword(password: String): void
+}
+
+class Reminder {
+    - id: Long
+    - title: String
+    - description: String
+    - dueDate: Date
+    - priority: String
+
+    + getId(): Long
+    + getTitle(): String
+    + getDescription(): String
+    + getDueDate(): Date
+    + getPriority(): String
+    + setTitle(title: String): void
+    + setDescription(description: String): void
+    + setDueDate(dueDate: Date): void
+    + setPriority(priority: String): void
+}
+
+class AuthenticationService {
+    + authenticateUser(email: String, password: String): String
+}
+
+class ReminderService {
+    + getAllReminders(): List<Reminder>
+    + getReminderById(id: Long): Reminder
+    + createReminder(reminder: Reminder): Reminder
+    + updateReminder(id: Long, reminder: Reminder): Reminder
+    + deleteReminder(id: Long): void
+}
+
+class NotificationService {
+    + sendNotification(userId: Long, message: String): void
+}
+
+User "1" --> "*" Reminder : owns
+
+class Frontend {
+    + registerUser(userDetails: Object): void
+    + loginUser(email: String, password: String): void
+    + loadReminders(): List<Reminder>
+    + addReminder(reminderDetails: Object): void
+    + editReminder(id: Long, reminderDetails: Object): void
+    + deleteReminder(id: Long): void
+}
+
+Frontend "1" --> "1" AuthenticationService : uses
+Frontend "1" --> "1" ReminderService : uses
+Frontend "1" --> "1" NotificationService : uses
+@enduml
