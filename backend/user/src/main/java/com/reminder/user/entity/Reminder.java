@@ -1,6 +1,6 @@
 package com.reminder.user.entity;
 
-import com.reminder.user.enums.RoleName;
+import com.reminder.user.enums.Priority;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,19 +12,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.time.Instant;
 
 @Getter
 @Setter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "tb_role")
-public class Role implements Serializable {
+@Table(name = "tb_reminder")
+public class Reminder implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private RoleName roleName;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+  private Long userId;
+  private String name;
+  private String description;
+  private Instant dueDate;
+  private Priority priority;
 }
