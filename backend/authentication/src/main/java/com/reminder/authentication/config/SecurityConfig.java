@@ -1,5 +1,7 @@
 package com.reminder.authentication.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,24 +14,23 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-  private final BCryptPasswordEncoder passwordEncoder;
-  private final UserDetailsService userDetailsService;
+  @Autowired private BCryptPasswordEncoder passwordEncoder;
 
-  @Autowired
-  public SecurityConfig(BCryptPasswordEncoder passwordEncoder, UserDetailsService userDetailsService) {
-    this.passwordEncoder = passwordEncoder;
-    this.userDetailsService = userDetailsService;
-  }
+  @Autowired private UserDetailsService userDetailsService;
+
+  Logger log = LoggerFactory.getLogger(SecurityConfig.class);
 
   @Override
   @Autowired
   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    log.debug("SecurityConfig::configure");
     auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
   }
 
   @Override
   @Bean
   protected AuthenticationManager authenticationManager() throws Exception {
+    log.debug("SecurityConfig::authenticationManager");
     return super.authenticationManager();
   }
 }

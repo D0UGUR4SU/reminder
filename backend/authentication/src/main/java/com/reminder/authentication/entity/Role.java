@@ -1,23 +1,37 @@
 package com.reminder.authentication.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import java.io.Serializable;
 import java.util.Objects;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class Role implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
-  private String id;
+  private Long id;
   private String roleName;
+
+  public Role() {}
+
+  public Role(Long id, String roleName) {
+    this.id = id;
+    this.roleName = roleName;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public String getRoleName() {
+    return roleName;
+  }
+
+  public void setRoleName(String roleName) {
+    this.roleName = roleName;
+  }
 
   @Override
   public boolean equals(Object o) {

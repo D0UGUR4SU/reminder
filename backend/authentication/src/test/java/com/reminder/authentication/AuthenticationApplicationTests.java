@@ -1,9 +1,9 @@
-package com.reminder.hroauth;
+package com.reminder.authentication;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+@SpringBootTest(classes = { AuthenticationApplicationTests.class })
 class AuthenticationApplicationTests {
 
 	@Test
