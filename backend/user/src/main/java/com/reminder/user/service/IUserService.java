@@ -8,7 +8,7 @@ public interface IUserService {
 
   void createUser(UserDto userDto);
 
-  List<UserDto> getUser();
+  List<UserDto> getAllUsers();
 
   UserDto getUserById(Long id);
 

@@ -13,6 +13,7 @@ CREATE TABLE tb_user
 CREATE TABLE tb_reminder
 (
     id          BIGINT PRIMARY KEY AUTO_INCREMENT,
+    user_id     BIGINT,
     title       VARCHAR(255) NOT NULL,
     description VARCHAR(255),
     due_date    DATE,

@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static com.reminder.user.constants.Constants.MESSAGE_200;
 import static com.reminder.user.constants.Constants.MESSAGE_201;
 import static com.reminder.user.constants.Constants.MESSAGE_500;
@@ -32,6 +34,14 @@ public class UserController {
     return ResponseEntity
             .status(HttpStatus.CREATED)
             .body(new ResponseDto(STATUS_201, MESSAGE_201));
+  }
+
+  @GetMapping
+  public ResponseEntity<List<UserDto>> getAllUsers() {
+    List<UserDto> usersDto = iUserService.getAllUsers();
+    return ResponseEntity
+            .status(HttpStatus.OK)
+            .body(usersDto);
   }
 
   @GetMapping("/{id}")

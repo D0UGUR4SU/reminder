@@ -43,13 +43,13 @@ public class UserServiceImpl implements IUserService {
     user.setName(userDto.getName());
     user.setEmail(userDto.getEmail());
     user.setPassword(userDto.getPassword());
-    user.setReminders(ReminderMapper.mapToReminderList(userDto.getReminders()));
+    user.setReminders(ReminderMapper.mapToReminderList(userDto.getReminders(), user.getId()));
 
     userRepository.save(user);
   }
 
   @Override
-  public List<UserDto> getUser() {
+  public List<UserDto> getAllUsers() {
     List<User> users = userRepository.findAll();
     return UserMapper.mapToUserDtoList(users);
   }
@@ -82,7 +82,7 @@ public class UserServiceImpl implements IUserService {
                         new ResourceNotFoundException(
                             REMINDER, REMINDER_ID, reminderId.toString()));
 
-        ReminderMapper.mapToReminder(reminderDto);
+        ReminderMapper.mapToReminder(reminderDto, userDto.getId());
         reminderRepository.save(reminder);
       }
 

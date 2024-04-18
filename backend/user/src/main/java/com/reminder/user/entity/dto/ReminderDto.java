@@ -9,9 +9,7 @@ import lombok.Data;
 public class ReminderDto {
   private Long id;
   private Long userId;
-  private String name;
   private String description;
   private Instant dueDate;
   private Priority priority;
-  private UserDto userDto;
-}
+  }

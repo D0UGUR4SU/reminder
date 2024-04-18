@@ -18,16 +18,13 @@ public class UserMapper {
     userDto.setPassword(user.getPassword());
     userDto.setReminders(
         user.getReminders().stream()
-            .map(ReminderMapper::mapToReminderDto)
+            .map(reminder -> ReminderMapper.mapToReminderDto(reminder, user.getId()))
             .collect(Collectors.toList()));
     return userDto;
   }
 
   public static List<UserDto> mapToUserDtoList(List<User> users) {
-    return users
-            .stream()
-            .map(UserMapper::mapToUserDto)
-            .collect(Collectors.toList());
+    return users.stream().map(user -> mapToUserDto(user)).collect(Collectors.toList());
   }
 
   public static User mapToUser(UserDto userDto) {
@@ -39,7 +36,7 @@ public class UserMapper {
     user.setPassword(userDto.getPassword());
     user.setReminders(
         userDto.getReminders().stream()
-            .map(ReminderMapper::mapToReminder)
+            .map(reminderDto -> ReminderMapper.mapToReminder(reminderDto, user.getId()))
             .collect(Collectors.toList()));
     return user;
   }
